@@ -17,3 +17,9 @@ cd hello_location/
 dfx help
 dfx config --help
 ```
+
+Helpful Commands:
+
+pkill client nodemanager dfx, 
+
+kill node manager
