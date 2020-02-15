@@ -1,0 +1,39 @@
+type Profile_3 = Profile;
+type Profile = 
+ record {
+   "company": text;
+   "education": text;
+   "experience": text;
+   "firstName": text;
+   "id": PrincipalId;
+   "imgUrl": text;
+   "lastName": text;
+   "title": text;
+ };
+type PrincipalId_3 = PrincipalId;
+type PrincipalId = Hash;
+type NewProfile_3 = NewProfile;
+type NewProfile = 
+ record {
+   "company": text;
+   "education": text;
+   "experience": text;
+   "firstName": text;
+   "imgUrl": text;
+   "lastName": text;
+   "title": text;
+ };
+type Hash = BitVec;
+type BitVec = nat32;
+service : {
+  "connect": (PrincipalId_3) -> ();
+  "create": (NewProfile_3) -> (PrincipalId_3);
+  "get": (PrincipalId_3) -> (Profile_3) query;
+  "getConnections": (PrincipalId_3) -> (vec Profile_3);
+  "getOwn": () -> (Profile_3) query;
+  "getOwnConnections": () -> (vec Profile_3);
+  "healthcheck": () -> (bool);
+  "isConnected": (PrincipalId_3) -> (bool);
+  "search": (text) -> (vec Profile_3) query;
+  "update": (Profile_3) -> ();
+}

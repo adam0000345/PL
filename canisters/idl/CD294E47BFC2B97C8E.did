@@ -1,0 +1,7 @@
+type EntryId_2 = EntryId;
+type EntryId = nat32;
+service : {
+  "connect": (nat32, nat32) -> ();
+  "getConnections": (EntryId_2) -> (vec EntryId_2);
+  "healthcheck": () -> (bool);
+}

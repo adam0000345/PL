@@ -1,3 +1,0 @@
-service : {
-  "location": (text) -> (text);
-}

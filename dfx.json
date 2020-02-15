@@ -1,22 +1,26 @@
 {
-  "canisters": {
-    "hello_location": {
-      "frontend": {
-        "entrypoint": "src/hello_location/public/index.js"
-      },
-      "main": "src/hello_location/main.mo"
-    }
-  },
-  "defaults": {
-    "build": {
-      "output": "canisters/"
+    "canisters": {
+        "graph": {
+            "main": "src/graph/main.mo"
+        },
+        "profile": {
+            "main": "src/profile/main.mo",
+            "frontend": {
+                "entrypoint": "src/profile/public/main.js",
+                "assets": [
+                    "src/profile/public/*.html",
+                    "src/profile/public/*.css"
+                ]
+            }
+        }
     },
-    "start": {
-      "address": "127.0.0.1",
-      "port": 8000,
-      "serve_root": "canisters/hello_location/assets"
+    "defaults": {
+        "build": {
+            "output": "canisters"
+        },
+        "start": {
+            "address": "127.0.0.1",
+            "port": 8000
+        }
     }
-  },
-  "dfx": "0.4.13",
-  "version": 1
 }

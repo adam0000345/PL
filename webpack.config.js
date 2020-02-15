@@ -1,3 +1,4 @@
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const dfxJson = require("./dfx.json");
@@ -34,6 +35,7 @@ function generateWebpackConfigForCanister(name, info) {
   const outputRoot = path.join(__dirname, dfxJson.defaults.build.output, name);
   const inputRoot = __dirname;
   const entry = path.join(inputRoot, info.frontend.entrypoint);
+  const assets = info.frontend.assets;
 
   return {
     mode: "production",
@@ -51,7 +53,20 @@ function generateWebpackConfigForCanister(name, info) {
       path: path.join(outputRoot, "assets"),
     },
     plugins: [
+      new CopyPlugin(assets.map(x => {
+        if (typeof x == "string") {
+          return { from: path.join(inputRoot, x), to: path.join(outputRoot, "assets"), flatten: true };
+        } else {
+          return { ...x, from: path.join(inputRoot, x.from), to: path.join(outputRoot, "assets", x.to || '') };
+        }
+      })),
     ],
+    module: {
+      rules: [{
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }]
+    }
   };
 }
 
